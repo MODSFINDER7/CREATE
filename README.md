@@ -27,6 +27,8 @@ The upstream extractor verifies the Create JAR SHA-256 before importing assets. 
 
 ## Compatibility status
 
-Package layout is adapted for Starling's flat native package reader. **This does not yet prove that the mod compiles or runs in Starling 0.9.0.** The existing `[native]` Horizon and horizon-mixins commit pins still need to be checked against the exact game build served to Starling 0.9.0, then the package must pass Starling's native build service. No runtime test is claimed here.
+The package structure is supported by Starling's flat native-package importer, but **the current Create-Horizon source is not yet compilable through Starling 0.9.0's per-mod Compile v2 route**. That route refuses `[native.*]` tables and any Cargo dependency other than `horizon-mod-api`; this project currently has `[[native.mixin]]`, the local `create-kinetics` crate, and `flate2`. The legacy `.hnmod` route is not a workaround: Starling 0.9.0 no longer compiles the old bundle format for its game-as-libraries build.
 
-Do not rename the package to `.hnmod`: the native flat package is identified by its manifest and is imported as native code by Starling.
+See [STARLING_0_9_0_BLOCKERS.md](STARLING_0_9_0_BLOCKERS.md) for the source-level audit and the two engineering routes. No successful compile or runtime test is claimed.
+
+Do not rename the package to `.hnmod`: this project uses the flat native `.hmod` structure, which Starling identifies by its manifest.
